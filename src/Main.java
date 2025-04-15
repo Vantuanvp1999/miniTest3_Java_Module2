@@ -11,29 +11,43 @@ public class Main {
         books[5] = new FictionBook("St6","Last Rose",120,"Melanie","Vien tuong 2");
          int sumPrice = 0;
          for (Book book : books) {
-             sumPrice += book.getPrice();
+             sumPrice += book.getFinalPrice();
          }
         System.out.println(sumPrice);
-         int countLanguage = 0;
-         for (Book book : books) {
-             if( book instanceof ProgrammingBook && ((ProgrammingBook) book).getLanguage()=="Java" && ((ProgrammingBook) book).getLanguage()=="Java" ) {
-                 countLanguage++;
-             }
-         }
-         System.out.println(countLanguage);
-         int countCategory = 0;
-         for (Book book : books) {
-             if(book instanceof FictionBook && ((FictionBook) book).getCategory()=="Vien tuong 1") {
-                 countCategory++;
-             }
-         }
+        int countLanguage = getCountLanguage(books,"Java");
+        System.out.println(countLanguage);
+        int countCategory = getCountCategory(books,"Vien tuong 1");
         System.out.println(countCategory);
-         int countPrice=0;
-         for (Book book : books) {
-             if(book.getPrice()>100&&book instanceof FictionBook) {
-                 countPrice++;
-             }
-         }
-         System.out.println(countPrice);
+        getCountPrice(books,100);
+    }
+
+    private static void getCountPrice(Book[] books,int price) {
+        int countPrice=0;
+        for (Book book : books) {
+            if(book.getPrice()>price&&book instanceof FictionBook) {
+                countPrice++;
+            }
+        }
+        System.out.println(countPrice);
+    }
+
+    private static int getCountCategory(Book[] books, String Category) {
+        int countCategory = 0;
+        for (Book book : books) {
+            if(book instanceof FictionBook && ((FictionBook) book).getCategory()== Category) {
+                countCategory++;
+            }
+        }
+        return countCategory;
+    }
+
+    private static int getCountLanguage(Book[] books,String language) {
+        int countLanguage = 0;
+        for (Book book : books) {
+            if( book instanceof ProgrammingBook && ((ProgrammingBook) book).getLanguage()==language ) {
+                countLanguage++;
+            }
+        }
+        return countLanguage;
     }
 }
